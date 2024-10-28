@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    * {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-weight: bolder;
+      font-size: 40px;
+    }
+    .btn-random {
+      width: 100px;
+      height: 80px;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      background-color: rgb(0, 131, 239);
+    }
+    .btn-random:hover {
+      transition-duration: 0.5s;
+      background-color: rgb(0, 48, 145);
+    }
+
+    .btn {
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    .fa-circle-check {
+      color: green;
+    }
+    .fa-circle-xmark {
+      color: rgb(255, 0, 0);
+    }
+    .btn-random:focus {
+      transition-duration: 0.3s;
+      border-radius: 50%;
+    }
+    #next {
+      text-align: center;
+    }
+    .container {
+        box-shadow: 0 0 20px yellow;
+      position: relative;
+      top: 50vh;
+      transform: translateY(-50%);
+      background-color: rgb(255, 255, 255);
+      padding: 50px 0;
+      border-radius: 20px;
+    }
+    body {
+      background-color: rgb(39, 51, 106);
+    }
+    #math1 {
+      gap: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #math {
+      padding: 10px;
+      width: max-content;
+      border-radius: 20px;
+      background-color: rgb(215, 118, 0);
+      color: #ffffff;
+    }
+    #res {
+      width: 100px;
+      border: 2px solid;
+      display: block;
+      border-radius: 10px;
+    }
+    #res:focus {
+      outline-color:blue;
+    }
+    #btn-check{
+      border: none;
+      color: white;
+      border-radius: 5px;
+      background-color: rgb(0, 131, 239);
+      padding: 10px;
+      margin-left: 30px;
+    }
+    #btn-check:hover{
+      background-color: rgb(0, 48, 145);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <form id="math1" onsubmit="return checkResult(event)">
+        <div id="math"></div>
+        <input type="number" name="res" id="res" min="1" placeholder="?" />
+        <button id="btn-check" type="submit">Check</button>
+              <span id="notification"></span>
+      </form>
+      <!-- <div class="btn">
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        
+      </div> -->
+      <!-- <div id="next" >
+        <i id="iconNext" class="fa-solid fa-angles-right"></i>
+      </div> -->
+    </div>
+    <script>
+      var math = document.getElementById("math");
+      var result = document.getElementById("result");
+      var res = document.getElementById("res");
+      var notification = document.getElementById("notification");
+      var iconNext = document.getElementById("iconNext");
+      var next = document.getElementById("next");
+      var a = Math.round(Math.random() * 9) + 1;
+      var b = Math.round(Math.random() * 9) + 1;
+      math.innerHTML = a + " x " + b + " = ";
+      var last = a * b;
+
+      function checkResult(e) {
+        let buttonClick = e.target;
+        if (res.value == last) {
+          return true;
+        } else {
+          notification.innerHTML = 'Sai !!!';
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>

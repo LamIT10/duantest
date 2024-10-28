@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    * {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-weight: bolder;
+      font-size: 40px;
+    }
+    .btn-random {
+      width: 100px;
+      height: 80px;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      background-color: rgb(0, 131, 239);
+    }
+    .btn-random:hover {
+      transition-duration: 0.5s;
+      background-color: rgb(0, 48, 145);
+    }
+    #math {
+      padding: 10px;
+      text-align: center;
+      margin: 0 auto;
+      /* border: 5px solid rgb(232, 0, 0); */
+      width: max-content;
+      border-radius: 20px;
+      /* color: rgb(232, 0, 0); */
+      background-color: rgb(167, 255, 166);
+      box-shadow: -10px 10px rgb(0, 158, 26);
+    }
+    .btn {
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    .fa-circle-check {
+      color: green;
+    }
+    .fa-circle-xmark {
+      color: rgb(255, 0, 0);
+    }
+    .btn-random:focus {
+      transition-duration: 0.3s;
+      border-radius: 50%;
+    }
+    #next {
+      text-align: center;
+    }
+    #iconNext {
+      font-size: 60px;
+      color: rgb(255, 255, 255);
+      padding: 5px 20px;
+      border-radius: 10px;
+      background-color: rgb(0, 196, 10);
+      display: none;
+    }
+    .container {
+      position: relative;
+      top: 50vh;
+      transform: translateY(-50%);
+      background-color: rgb(255, 255, 255);
+      padding: 50px 0;
+      border-radius: 20px;
+    }
+    body {
+      background-color: rgb(77, 193, 255);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div id="math" class="mb-2"></div>
+      <div class="btn">
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <button onclick="checkResult(event)" class="btn-random"></button>
+        <span id="notification"></span>
+      </div>
+      <div id="next" onclick="location.reload()">
+        <i id="iconNext" class="fa-solid fa-angles-right"></i>
+      </div>
+    </div>
+    <script>
+      var math = document.getElementById("math");
+      var result = document.getElementById("result");
+      var notification = document.getElementById("notification");
+      var iconNext = document.getElementById("iconNext");
+      var next = document.getElementById("next");
+      var a = Math.round(Math.random() * 15);
+      var b = Math.round(Math.random() * 10);
+      var c = Math.round(Math.random() * 10);
+      var d = Math.round(Math.random() * 10);
+      var e = Math.round(Math.random() * 15);
+
+      var arr = [a, b, c, d, e];
+      var operator = [" + ", " - "];
+
+      function checkOperator(o) {
+        return Math.round(Math.random());
+      }
+      var math1 = a + operator[checkOperator(a)] + b;
+      var math2 = math1 + operator[checkOperator(a)] + c;
+      var math3 = math2 + operator[checkOperator(a)] + d;
+      var math4 = math3 + operator[checkOperator(a)] + e;
+
+      function check(param) {
+        if (eval(param) >= 0) {
+          return 1;
+        } else return 0;
+      }
+      if (
+        check(math1) == 1 &&
+        check(math2) == 1 &&
+        check(math3) == 1 &&
+        check(math4) == 1
+      ) {
+        math.innerHTML = math4;
+        var last = eval(math4);
+      } else {
+        location.reload();
+      }
+      let rand = Math.round(Math.random() * 3);
+      var btn = document.querySelectorAll(".btn-random");
+      btn[rand].innerHTML = last;
+      var htm = last + operator[checkOperator(a)];
+      var ranDomNumber = [1, 2, 3, 4];
+
+      for (let index = 0; index < btn.length; index++) {
+        if (index == rand) continue;
+        if (eval(htm + ranDomNumber[index]) < 0) location.reload();
+        else {
+          btn[index].innerHTML = eval(htm + ranDomNumber[index]);
+        }
+      }
+      function checkResult(e) {
+        let buttonClick = e.target;
+        if (buttonClick.innerHTML == last) {
+          iconNext.style.display = "inline-block";
+          btn.forEach((element) => {
+            buttonClick.style.borderRadius = "50%";
+            element.disabled = true;
+          });
+          notification.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        } else {
+          notification.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        }
+      }
+    </script>
+  </body>
+</html>
